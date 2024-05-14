@@ -2,25 +2,24 @@
 #include <cstring>
 
 bool substr(const char* a, const char* b) {
-    if (strlen(a) < strlen(b) || *b == '\0') {
+    int lenA = strlen(a);
+    int lenB = strlen(b);
+    
+    if (lenA < lenB || *b == '\0') {
         return false;
     }
 
-    bool found = false;
-
-    for (int i = 0; i <= strlen(a) - strlen(b); ++i) {
-        if (*(a + i) == *b) {
-            found = true;
-            for(int j = 1; j < strlen(b); ++j) {
-                if (*(b + j) != *(a + i + j)) {
-                    found = false;
-                    break;
-                }
+    for (int i = 0; i <= lenA - lenB; ++i) {
+        bool found = true;
+        for (int j = 0; j < lenB; ++j) {
+            if (a[i + j] != b[j]) {
+                found = false;
+                break;
             }
-            if (found) break;
         }
+        if (found) return true;
     }
-    return found;
+    return false;
 }
 
 int main() {
